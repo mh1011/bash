@@ -1,0 +1,2 @@
+# Bash
+Practicing Bash scripting
