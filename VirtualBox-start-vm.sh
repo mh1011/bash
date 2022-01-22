@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function Starting_VM () {
-echo "Starting Ansible-Control VM" 
+echo "Starting VM-Name" 
 vboxmanage startvm {VM-UUID} --type=headless
 }
 
