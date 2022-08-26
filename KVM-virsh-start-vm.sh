@@ -1,14 +1,13 @@
 #!/bin/bash
 
-# Might require sudo
-# VM-Name = VM Name from "vboxmanage list runningvms" command
+# Script requires sudo
+# VM-Name = VM Name from "sudo virsh list --all" command
 
-VMUUID=VM-UUID
 VMName=VM-Name
 
 function StartingVM () {
-echo "Starting VM-Name" 
-vboxmanage startvm {$VMUUID} --type=headless
+    echo "Starting $VMName" 
+    sudo virsh start $VMName
 }
 
 function CountDown(){
@@ -17,7 +16,7 @@ function CountDown(){
      echo -ne "$(date -u --date @$(($date1 - `date +%s`)) +%S)\r \c";
      sleep 0.1
    done
-} # Not my Function. Copied from somewhere
+}  # Not my Function. Copied from somewhere
 
 function SSH (){
   echo "Connecting with SSH ..."
@@ -40,11 +39,11 @@ fi
 
 echo "Checking VM Status ..."
 
-if virsh list --state-running | grep -q "$VMUUID""; then
-   echo "VM $VMUUID is running"
+if virsh list --state-running | grep -q "$VMName""; then
+   echo "VM $VMName is running"
    SSH
 else
-   echo "VM $VMUUID is not running"
+   echo "VM $VMName is not running"
    StartingVM
    echo "Waiting for VM to boot ..."
    CountDown 20
