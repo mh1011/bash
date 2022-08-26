@@ -6,6 +6,16 @@
 VMUUID=VM-UUID
 VMName=VM-Name
 
+function CheckRoot() {
+    if [ "root" != "$USER" ]; then
+        echo "This script requires you to be root"
+        echo -e "You're not \e[31mroot\e[0m"
+        echo "Please provide root password"
+        sudo  "$0" $USER
+        exit
+    fi
+} # Not my Function. Copied from somewhere
+
 function StartingVM () {
 echo "Starting VM-Name" 
 vboxmanage startvm {$VMUUID} --type=headless
@@ -38,6 +48,7 @@ else
 fi
 }
 
+CheckRoot
 echo "Checking VM Status ..."
 
 if virsh list --state-running | grep -q "$VMUUID""; then
