@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Starts & Login into local VirtualBox VMs
 # Might require sudo
 # VM-Name = VM Name from "vboxmanage list runningvms" command
 

@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Starts & Login into local KVM/QEMU VMs
 # Script requires sudo
 # VM-Name = VM Name from "sudo virsh list --all" command
 
